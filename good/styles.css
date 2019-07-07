@@ -1,0 +1,145 @@
+@font-face {
+  font-family: 'Frutiger W01';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 300;
+  src: url('https://assets.nhs.uk/fonts/FrutigerLTW01-45Light.eot?#iefix');
+  src: url('https://assets.nhs.uk/fonts/FrutigerLTW01-45Light.eot?#iefix')
+      format('eot'),
+    url('https://assets.nhs.uk/fonts/FrutigerLTW01-45Light.woff2')
+      format('woff2'),
+    url('https://assets.nhs.uk/fonts/FrutigerLTW01-45Light.woff') format('woff'),
+    url('https://assets.nhs.uk/fonts/FrutigerLTW01-45Light.ttf')
+      format('truetype'),
+    url('https://assets.nhs.uk/fonts/FrutigerLTW01-45Light.svg#29f3ff8a-1719-4e25-a757-53ee1a1114a5')
+      format('svg');
+}
+
+@font-face {
+  font-family: 'Frutiger W01';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 600;
+  src: url('https://assets.nhs.uk/fonts/FrutigerLTW01-65Bold.eot?#iefix');
+  src: url('https://assets.nhs.uk/fonts/FrutigerLTW01-65Bold.eot?#iefix')
+      format('eot'),
+    url('https://assets.nhs.uk/fonts/FrutigerLTW01-65Bold.woff2')
+      format('woff2'),
+    url('https://assets.nhs.uk/fonts/FrutigerLTW01-65Bold.woff') format('woff'),
+    url('https://assets.nhs.uk/fonts/FrutigerLTW01-65Bold.ttf')
+      format('truetype'),
+    url('https://assets.nhs.uk/fonts/FrutigerLTW01-65Bold.svg#eae74276-dd78-47e4-9b27-dac81c3411ca')
+      format('svg');
+}
+
+@font-face {
+  font-family: 'Frutiger W01';
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://assets.nhs.uk/fonts/FrutigerLTW01-55Roman.eot?#iefix');
+  src: url('https://assets.nhs.uk/fonts/FrutigerLTW01-55Roman.eot?#iefix')
+      format('eot'),
+    url('https://assets.nhs.uk/fonts/FrutigerLTW01-55Roman.woff2')
+      format('woff2'),
+    url('https://assets.nhs.uk/fonts/FrutigerLTW01-55Roman.woff') format('woff'),
+    url('https://assets.nhs.uk/fonts/FrutigerLTW01-55Roman.ttf')
+      format('truetype'),
+    url('https://assets.nhs.uk/fonts/FrutigerLTW01-55Roman.svg#7def0e34-f28d-434f-b2ec-472bde847115')
+      format('svg');
+}
+
+:root {
+  --nhs-colors-blue: #005eb8;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Frutiger W01';
+  color: #212b32;
+  background-color: #f0f4f5;
+  font-size: 19px;
+  line-height: 28px;
+}
+
+header {
+  display: flex;
+  height: 70px;
+  align-items: center;
+  width: 85%;
+  margin: 0;
+  padding: 0;
+  padding-left: 15%;
+  background-color: var(--nhs-colors-blue);
+}
+
+main {
+  width: 70%;
+  padding-left: 15%;
+  padding-right: 15%;
+  margin-top: 40px;
+}
+@media (max-width: 768px) {
+  header {
+    width: 100%;
+    padding-left: 20px;
+  }
+  main {
+    width: 100%;
+    padding-left: 20px;
+  }
+}
+
+header > img {
+  height: 36px;
+  width: 88px;
+  border: 3px solid transparent;
+}
+
+header > img:hover {
+  border: 3px solid #ffb81c;
+}
+
+header > h1 {
+  color: #fff;
+  font-size: 25px;
+  padding-left: 20px;
+  font-weight: lighter;
+}
+
+.nhsuk-warning {
+  background-color: #fae100;
+  padding: 20px 15% 20px 15%;
+  width: 70%;
+  display: none;
+}
+.shown {
+  display: block;
+}
+
+.nhsuk-text__warning {
+  color: #8a1538;
+  font-weight: 400;
+}
+
+.nhsuk-text__strong {
+  font-weight: bolder;
+}
+
+input {
+  width: 300px;
+
+  font-size: 18px;
+  padding: 10px;
+}
+
+main {
+  padding-bottom: 100px;
+}
+
+#mapdiv {
+  width: 100%;
+  height: 600px;
+}
