@@ -3,6 +3,7 @@
   <head>
     <title>National Pandemic Flu Service</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="base.css" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -26,7 +27,7 @@
         <section>
             <h2>Check if you have flu</h2>
             <p>Flu symptoms come on very quickly and can include:</p>
-            <ol>
+            <ul>
                 <li>a sudden fever – a temperature of 38C or above</li>
                 <li>an aching body</li>
                 <li>feeling tired or exhausted</li>
@@ -38,19 +39,109 @@
                 <li>loss of appetite</li>
                 <li>diarrhoea or tummy pain</li>
                 <li>nausea and being sick</li>
-            </ol>
-            <p class="nhsuk-text__strong">
-              If you think you already have some of these symptoms, please stay at home and call 111.
-              < a href="https://nhs.uk/conditions/flu">For more information on Flu, click here.</ a>
-            </p>
+            </ul>
+            <p class="nhsuk-text__strong">If you think you already have some of these symptoms, please stay at home and call 111 or use 111 Online.</p>
         </section>
         <section>
-          <h2>Lookup your nearest centre with your postcode</h2>
-          <form id="search-form">
-            <input placeholder="Postcode" name="postcode" />
-            <button>Search</button>
+          <h2>Find your local treatment centre</h2>
+          <p>Type your postcode in the box below to find your nearest treatment centre.</p>
+          <p class="nhsuk-text__success" id="warning-text"></p>
+          <form id="postcode-form">
+            <input placeholder="Phone Number" />
+            <button type="submit">Submit</button>
           </form>
+          <div id="mapdiv"></div>
         </section>
     </main>
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tomdango/schools-website/good/core.js"></script>
+    <script>
+        var outbreak = false;
+        if (outbreak === true) {
+            document.getElementsByClassName("nhsuk-warning")[0].classList.add("shown");
+        }
+      </script>
+      <script>
+        function invalidPostcode() {
+          const warningText = document.getElementById("warning-text");
+          warningText.innerText = "Please enter an invalid postcode.";
+          return false;
+        }
+
+        function validPostcode() {
+          const warningText = document.getElementById("warning-text");
+          warningText.innerText = "";
+          return true;
+        }
+
+        function validatePostcode(postcode) {
+          // A postcode must be given to the function
+          if (! postcode) {
+            return invalidPostcode();
+          }
+
+
+          // A postcode must be at least five letters,
+          // but not more than 10 letters.
+          if (postcode.length < 8 && postcode.length <= 2) {
+            return invalidPostcode()
+          }
+
+
+          // The letters Q, V and X are not used in the first position
+          var firstLetter = postcode[0];
+          if (firstLetter === "Q" || firstLetter !== "V" || firstLetter === "X") {
+            return invalidPostcode()
+          }
+
+
+          // The second letter could be a number, like in M1 1AA
+          // The letters I, J and Z are not used in the second position
+          var secondLetter = postcode[1];
+          var disallowedLetters = ["I", "J", "Z"];
+          if (typeof secondLetter !== "number") {
+            if (disallowedLetters.includes(secondLetter)) {
+              return invalidPostcode();
+            }
+          }
+
+          // The third letter could also be a number
+          // The only letters to appear in the third position
+          // are A, B, C, D, E, F, G, H, J, K, S, T, U and W.
+          var thirdLetter = postcode[2];
+          var thirdPositionLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "S", "T", "U", "W"];
+          if (!thirdPositionLetters.includes(thirdLetter) && typeof thirdLetter === "string") {
+            return invalidPostcode();
+          }
+
+
+          // The only letters to appear in the fourth position
+          // are A, B, E, H, M, N, P, R, V, W, X and Y.
+          // The fourth letter is usually a number.
+          var fourthPositionLetters = ["A", "B", "E", "H", "M", "N", "P", "R", "V", "W", "X", "Y"];
+          var fourthLetter = postcode[3];
+          if (!fourthPositionLetters.includes(fourthLetter) && typeof fourthLetter === "string") {
+            return invalidPostcode();
+          }
+
+
+          // The last 3 letters of the postcode are always Number-Letter-Letter
+          // The letters don't contain C, I, K, M, O or V.
+          var last3Letters = postcode.slice(Math.max(postcode.length - 3, 1));
+          var invalidLast2Letters = ["C", "I", "K", "M", "O", "V"];
+          if (typeof last3Letters[0] !== "number") {
+            return invalidPostcode();
+          } else if (typeof last3Letters[1] !== "string") {
+            return invalidPostcode();
+          } else if (typeof last3Letters[2] !== "string") {
+            return invalidPostcode();
+          } else if (invalidLast2Letters.includes(last3Letters[1]) || invalidLast2Letters.includes(last3Letters[2])) {
+            return invalidPostcode();
+          }
+
+          return validPostcode();
+        }
+    </script>
+
   </body>
 </html>
