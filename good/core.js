@@ -60,7 +60,7 @@ function processPostcode(postcode) {
   if (postcode !== currentPostcode) {
     currentPostcode = postcode;
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://api.postcodes.io/postcodes/' + postcode);
+    xhr.open('GET', 'https://api.postcodes.io/postcodes/' + postcode.join(''));
     xhr.onload = function() {
       const response = JSON.parse(this.responseText);
       const data = response.result;
